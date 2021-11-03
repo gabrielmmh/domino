@@ -8,4 +8,4 @@ if pergunta == 'sim':
     while num_players>0:
         players.append(num_players)
         num_players-=1
-        print('teste')
+        
