@@ -186,12 +186,15 @@ while jogar:
                                     if q not in possivel:
                                         print('Escolhe direito pff, nao te aguento mais')
                                     if q in possivel:
-                                        correto  = False
+                                        
                                         adiciona_na_mesa(jogadores[i][q],mesa)
                                         
 
-                                        print(mesa)
+                                        
+                                        
 
+                                        print(mesa)
+                                        correto  = False
                                         possui_carta = False
 
                                 # a = peca escolhida, agr alocar a peca
@@ -206,9 +209,9 @@ while jogar:
                     else:
                         #vez do computador
 
-                        print('Vez do Jogador {}, \nSuas peca(s) sao: {} '.format(jogadores[i],len(jogadores[i])))
+                        print('Vez do Jogador {}, \nEle tem: {} peca(s) '.format(i,len(jogadores[i])))
 
-                        possui_carta = False
+                        possui_carta = True
                         while possui_carta:
                             possivel=posicoes_possiveis(mesa,jogadores[i])
                             
@@ -220,7 +223,7 @@ while jogar:
                                 del jogadores[i]
 
 
-                                possui_carta = True
+                                possui_carta = False
 
                                 
 
@@ -235,28 +238,23 @@ while jogar:
                             else:
                                 correto = True
                                 while correto:
-                                    q=int(input('Escolha uma peca'))
+                                    q=random.randint(0,6)
                                     if q not in possivel:
-                                        print('Escolhe direito pff, nao te aguento mais')
+                                        print('Calma que o computador ta burro')
                                     if q in possivel:
-                                        correto  = False
+                                        
                                         adiciona_na_mesa(jogadores[i][q],mesa)
                                         print(mesa)
+                                        
 
-                                        possui_carta = True
+                                        correto  = False
+                                        possui_carta = False
 
                     
 
-                
-
-
-
+    
 
                 #verificando vencedor ( como pode haver mais de 1 'vencedor')
-
-
-            
-
                 for player,mao in jogadores.items():
 
                     if len(mao) == 0:
@@ -264,10 +262,11 @@ while jogar:
                         print('Parabens ao jogador {}, ele e o unico que presta'.format(player))
                         mais_rodadas = False
                         jogar = False
+
+               
                 i+=1
             
-            else:  
-                i+=1
+                
             
 
             
