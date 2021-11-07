@@ -144,101 +144,106 @@ while jogar:
             #condicao -->  if pecas possiveis nao existir and  len(mesa) == 0
             i=0
             while i < num_players:
-                #############################################################
-                if i == num_players - 1:
-                    # situacao em que e o round do player fisico
-                    
-                    print('Sua vez doidao, voce tem {} \nSuas peca(s) sao: {}'.format(len(jogadores[i]),(jogadores[i])))
-
-                    
-                    
-                    possui_carta = False
-                    while possui_carta:
-                        possivel=posicoes_possiveis(mesa,jogadores[i])
+                if i in jogadores.keys():
+                    #############################################################
+                    if i == num_players - 1:
+                        # situacao em que e o round do player fisico
                         
-                        if len(possivel) == 0 and len(monte)==0:
-                            # jogador nao pode mais continuar
-                            print('Parabens por ser horrivel \nPlayers {} esta eliminado \nCaso nessa rodada nenhum tenha colocado uma peca, vc ainda pode ganhar'.format(i))
-                            soma=soma_pecas(jogadores[i])
-                            pontos[i]=soma
-                            del jogadores[i]
+                        print('Sua vez doidao, voce tem {} \nSuas peca(s) sao: {}'.format(len(jogadores[i]),(jogadores[i])))
 
-
-                            possui_carta = True
-
-                            
-
-
-
-                        if len(possivel) == 0 and len(monte) > 0:
-                            
-                            print('Voce n tem uma q serve, vai pegar do monte')
-                            jogadores[i].append(monte[0])
-                            monte.pop[0]
-
-                        else:
-                            correto = True
-                            while correto:
-                                q=int(input('Escolha uma peca'))
-                                if q not in possivel:
-                                    print('Escolhe direito pff, nao te aguento mais')
-                                if q in possivel:
-                                    correto  = False
-                                    adiciona_na_mesa(jogadores[i][q],mesa)
-                                    print(mesa)
-
-                                    possui_carta = True
-
-                            # a = peca escolhida, agr alocar a peca
-
-
-
-
-                    
-
-
-                ################################################
-                else:
-                    #vez do computador
-
-                    print('Vez do Jogador {}, \nSuas peca(s) sao: {} '.format(jogadores[i],len(jogadores[i])))
-
-                    possui_carta = False
-                    while possui_carta:
-                        possivel=posicoes_possiveis(mesa,jogadores[i])
                         
-                        if len(possivel) == 0 and len(monte)==0:
-                            # jogador nao pode mais continuar
-                            print('Parabens por ser horrivel \nPlayers {} esta eliminado \nCaso nessa rodada nenhum tenha colocado uma peca, vc ainda pode ganhar'.format(i))
-                            soma=soma_pecas(jogadores[i])
-                            pontos[i]=soma
-                            del jogadores[i]
-
-
-                            possui_carta = True
-
+                        
+                        possui_carta = True 
+                        while possui_carta:
+                            possivel=posicoes_possiveis(mesa,jogadores[i])
                             
+                            if len(possivel) == 0 and len(monte)==0:
+                                # jogador nao pode mais continuar
+                                print('Parabens por ser horrivel \nPlayers {} esta eliminado \nCaso nessa rodada nenhum tenha colocado uma peca, vc ainda pode ganhar'.format(i))
+                                soma=soma_pecas(jogadores[i])
+                                pontos[i]=soma
+                                del jogadores[i]
+
+
+                                possui_carta = False
+
+                                
 
 
 
-                        if len(possivel) == 0 and len(monte) > 0:
-                            
-                            print('Voce n tem uma q serve, vai pegar do monte')
-                            jogadores[i].append(monte[0])
-                            monte.pop[0]
+                            if len(possivel) == 0 and len(monte) > 0:
+                                
+                                print('Voce n tem uma q serve, vai pegar do monte')
+                                jogadores[i].append(monte[0])
+                                monte.pop[0]
 
-                        else:
-                            correto = True
-                            while correto:
-                                q=int(input('Escolha uma peca'))
-                                if q not in possivel:
-                                    print('Escolhe direito pff, nao te aguento mais')
-                                if q in possivel:
-                                    correto  = False
-                                    adiciona_na_mesa(jogadores[i][q],mesa)
+                            else:
+                                correto = True
+                                while correto:
                                     print(mesa)
+                                    print('As pecas possiveis sao: {} '.format(possivel))
+                                    q=int(input('Escolha uma peca(lembrando que a posicao da primeira peca em sua mao e 0):  '))
+                                    if q not in possivel:
+                                        print('Escolhe direito pff, nao te aguento mais')
+                                    if q in possivel:
+                                        correto  = False
+                                        adiciona_na_mesa(jogadores[i][q],mesa)
+                                        
 
-                                    possui_carta = True
+                                        print(mesa)
+
+                                        possui_carta = False
+
+                                # a = peca escolhida, agr alocar a peca
+
+
+
+
+                        
+
+
+                    ################################################
+                    else:
+                        #vez do computador
+
+                        print('Vez do Jogador {}, \nSuas peca(s) sao: {} '.format(jogadores[i],len(jogadores[i])))
+
+                        possui_carta = False
+                        while possui_carta:
+                            possivel=posicoes_possiveis(mesa,jogadores[i])
+                            
+                            if len(possivel) == 0 and len(monte)==0:
+                                # jogador nao pode mais continuar
+                                print('Parabens por ser horrivel \nPlayers {} esta eliminado \nCaso nessa rodada nenhum tenha colocado uma peca, vc ainda pode ganhar'.format(i))
+                                soma=soma_pecas(jogadores[i])
+                                pontos[i]=soma
+                                del jogadores[i]
+
+
+                                possui_carta = True
+
+                                
+
+
+
+                            if len(possivel) == 0 and len(monte) > 0:
+                                
+                                print('Voce n tem uma q serve, vai pegar do monte')
+                                jogadores[i].append(monte[0])
+                                monte.pop[0]
+
+                            else:
+                                correto = True
+                                while correto:
+                                    q=int(input('Escolha uma peca'))
+                                    if q not in possivel:
+                                        print('Escolhe direito pff, nao te aguento mais')
+                                    if q in possivel:
+                                        correto  = False
+                                        adiciona_na_mesa(jogadores[i][q],mesa)
+                                        print(mesa)
+
+                                        possui_carta = True
 
                     
 
@@ -252,16 +257,17 @@ while jogar:
 
             
 
-            for player,mao in jogadores.items():
+                for player,mao in jogadores.items():
 
-                if len(mao) > 0:
-     
-                    print('Parabens ao jogador {}, ele e o unico que presta'.format(player))
-                    mais_rodadas = False
-                    jogar = False
+                    if len(mao) == 0:
+        
+                        print('Parabens ao jogador {}, ele e o unico que presta'.format(player))
+                        mais_rodadas = False
+                        jogar = False
+                i+=1
             
-                    
-            i+=1
+            else:  
+                i+=1
             
 
             
