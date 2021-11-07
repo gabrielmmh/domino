@@ -175,7 +175,7 @@ while jogar:
                                 
                                 print('Voce n tem uma q serve, vai pegar do monte')
                                 jogadores[i].append(monte[0])
-                                monte.pop[0]
+                                monte.pop(0)
 
                             else:
                                 correto = True
@@ -188,7 +188,7 @@ while jogar:
                                     if q in possivel:
                                         
                                         adiciona_na_mesa(jogadores[i][q],mesa)
-                                        
+                                        jogadores[i].pop(q)
 
                                         
                                         
@@ -233,7 +233,7 @@ while jogar:
                                 
                                 print('Voce n tem uma q serve, vai pegar do monte')
                                 jogadores[i].append(monte[0])
-                                monte.pop[0]
+                                monte.pop(0)
 
                             else:
                                 correto = True
@@ -244,6 +244,9 @@ while jogar:
                                     if q in possivel:
                                         
                                         adiciona_na_mesa(jogadores[i][q],mesa)
+                                        
+                                        
+                                            
                                         print(mesa)
                                         
 
@@ -253,7 +256,7 @@ while jogar:
                     
 
     
-
+                vencedores=[]
                 #verificando vencedor ( como pode haver mais de 1 'vencedor')
                 for player,mao in jogadores.items():
 
