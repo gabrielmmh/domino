@@ -1,4 +1,5 @@
 # Nao esquecer de desligar o jogo atraves de 'jogar = False'
+import random
 
 #posiciona a peca na mesa
 def adiciona_na_mesa(peca,mesa):
@@ -59,6 +60,14 @@ def posicoes_possiveis(mesa,lista_pecas):
         
         return possivel
 
+def cria_pecas():
+    pecas = [
+	[1,3], [0,1], [4,6], [0,3], [0,4], [6,6], [0,6],
+	[1,1], [1,2], [0,0], [1,4], [1,5], [1,6], [2,2],
+	[3,6], [2,4], [2,5], [2,6], [3,3], [3,4], [2,3],
+	[3,5], [4,4], [4,5], [0,2], [5,5], [5,6], [0,5]
+]
+    return random.shuffle(pecas)
 
 import random
 jogar = True
@@ -74,14 +83,9 @@ while jogar:
         num_players=int(input('Para quantos queres perder? (2 a 4 jogadores) '))
 
         # criando as peças
-        pecas = [
-    	[1,3], [0,1], [4,6], [0,3], [0,4], [6,6], [0,6],
-    	[1,1], [1,2], [0,0], [1,4], [1,5], [1,6], [2,2],
-    	[3,6], [2,4], [2,5], [2,6], [3,3], [3,4], [2,3],
-	    [3,5], [4,4], [4,5], [0,2], [5,5], [5,6], [0,5]
-        ]
+        pecas = cria_pecas()
         
-        random.shuffle(pecas)
+        
         
         
 
@@ -155,6 +159,7 @@ while jogar:
                             possivel=posicoes_possiveis(mesa,jogadores[i])
                             
                             if len(possivel) == 0 and len(monte)==0:
+                                
                                 # jogador nao pode mais continuar
                                 print('Parabens por ser horrivel \nPlayers {} esta eliminado \nCaso nessa rodada nenhum tenha colocado uma peca, vc ainda pode ganhar'.format(i))
                                 soma=soma_pecas(jogadores[i])
@@ -169,13 +174,16 @@ while jogar:
 
 
                             if len(possivel) == 0 and len(monte) > 0:
+                               
                                 
                                 print('Voce n tem uma q serve, vai pegar do monte')
                                 jogadores[i].append(monte[0])
                                 monte.pop(0)
 
                             else:
+                                
                                 print('Mesa: {}'.format(mesa))
+                                
                                 print('As pecas possiveis sao: {} '.format(possivel))
                                 correto = True
 
@@ -183,6 +191,7 @@ while jogar:
                                     
                                     q=int(input('Escolha uma peca(lembrando que a posicao da primeira peca em sua mao e 0):  '))
                                     if q not in possivel:
+                                        
                                         print('Escolhe direito pff, nao te aguento mais')
                                     else:
                                         correto  = False
@@ -193,7 +202,7 @@ while jogar:
 
                                         
                                         
-
+                                        
                                         print('Mesa Apos Jogada do Player {} :  \n--> {}'.format(i,mesa))
                                         
 
@@ -208,7 +217,7 @@ while jogar:
                     ################################################
                     else:
                         #vez do computador
-
+                        
                         print('Vez do Jogador {}, \nEle tem: {} peca(s) '.format(i,len(jogadores[i])))
 
                         possui_carta = True
@@ -216,6 +225,7 @@ while jogar:
                             possivel=posicoes_possiveis(mesa,jogadores[i])
                             
                             if len(possivel) == 0 and len(monte)==0:
+                                
                                 # jogador nao pode mais continuar
                                 print('Parabens por ser horrivel \nPlayers {} esta eliminado \nCaso nessa rodada nenhum tenha colocado uma peca, vc ainda pode ganhar'.format(i))
                                 soma=soma_pecas(jogadores[i])
@@ -231,6 +241,7 @@ while jogar:
 
                             if len(possivel) == 0 and len(monte) > 0:
                                 
+                                
                                 print('Voce n tem uma q serve, vai pegar do monte')
                                 jogadores[i].append(monte[0])
                                 monte.pop(0)
@@ -241,15 +252,16 @@ while jogar:
                                     rd=6
                                     q=random.randint(0,rd)
                                     if q not in possivel:
+                                        
                                         print('Calma que o computador ta burro')
-                                        rd-=1
+                                        
                                     else:
                                         
                                         adiciona_na_mesa(jogadores[i][q],mesa)
                                         jogadores[i].pop(q)
                                         
                                         
-                                            
+                                         
                                         print('Mesa: {} '.format(mesa))
                                         
 
@@ -264,10 +276,26 @@ while jogar:
                 for player,mao in jogadores.items():
 
                     if len(mao) == 0:
+                        vencedores.append(player)
         
-                        print('Parabens ao jogador {}, ele e o unico que presta'.format(player))
-                        mais_rodadas = False
-                        jogar = False
+                if len(vencedores) == 1:
+                    
+                    print('Parabens ao jogador {}, ele e o unico que presta'.format(player))
+                    mais_rodadas = False
+                    
+                menor = 100
+                if len(vencedores) > 1:
+                    for k,v in soma.items():
+                        if v < menor:
+                            menor = v
+                            
+                    print('Parabens ao jogador {}, ele e o unico que presta'.format(k))
+                    mais_rodadas = False
+                
+                   
+
+
+
 
                
                 i+=1
